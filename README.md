@@ -47,7 +47,7 @@ Project ini mendemonstrasikan implementasi siklus DevOps secara end-to-end:
 ## Testing Performance Matrix
 
 * Click Menggunakan coffee_brews_total 
-* Video Demo Project : coming soon
+* Video Demo Project : https://drive.google.com/file/d/1fJu4B2mYi3JfUW9o7SPwpnygBGsLrQnM/view?usp=sharing
 
 ## Special Thanks To 
 
