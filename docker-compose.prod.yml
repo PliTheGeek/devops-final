@@ -22,8 +22,9 @@ services:
 
   # Project App - Coffee-Calc
   app:
-    build: ./coffee-calc      
-    dockerfile: Dockerfile
+    build: 
+      context: ./coffee-calc      
+      dockerfile: Dockerfile
     container_name: coffee_app
     restart: always
     ports:
@@ -34,12 +35,9 @@ services:
       - db
     environment:
       - DB_HOST=db            
-      - DB_USER=user
-      - DB_PASS=password
-      - DB_NAME=coffee_db    
-    volumes:
-      - ./coffee-calc:/app
-      - /app/node_modules   
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}  
 
   # 2. PROMETHEUS 
   prometheus:
