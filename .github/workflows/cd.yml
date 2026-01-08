@@ -19,7 +19,7 @@ jobs:
         host: ${{ secrets.VM_HOST }}
         username: ${{ secrets.VM_USERNAME }}
         password: ${{ secrets.VM_PASSWORD }}
-        source: "coffee-calc/,config/prometheus.yml,docker-compose.prod.yml"
+        source: "coffee-calc/,config/prometheus.yml,docker-compose.prod.yml,init.sql"
         target: "/home/${{ secrets.VM_USERNAME }}/app"
         overwrite: true
 
