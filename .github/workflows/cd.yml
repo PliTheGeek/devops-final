@@ -1,0 +1,52 @@
+name: Deploy to Azure VM (Secure CD)
+
+on:
+  push:
+    branches: [ "prod" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Copy Folder Project & Config
+    - name: Copy files to VM via SSH
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USERNAME }}
+        password: ${{ secrets.VM_PASSWORD }}
+        source: "coffee-calc/,config/prometheus.yml,docker-compose.prod.yml"
+        target: "/home/${{ secrets.VM_USERNAME }}/app"
+        overwrite: true
+
+    # Eksekusi di Server
+    - name: Deploy on VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USERNAME }}
+        password: ${{ secrets.VM_PASSWORD }}
+        script: |
+          cd /home/${{ secrets.VM_USERNAME }}/app
+          
+          # Rename file
+          mv docker-compose.prod.yml docker-compose.yml
+          mv config/prometheus.yml prometheus.yml || true
+
+          # GENERATE FILE .ENV DARI SECRETS 
+          # Kita suntikkan rahasia dari GitHub ke dalam file .env di server
+          echo "POSTGRES_USER=${{ secrets.DB_USER }}" > .env
+          echo "POSTGRES_PASSWORD=${{ secrets.DB_PASS }}" >> .env
+          echo "POSTGRES_DB=coffee_db" >> .env
+          
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+          echo "DB_NAME=coffee_db" >> .env
+          echo "DB_HOST=db" >> .env
+
+          # Jalankan Docker
+          docker compose up -d --build --remove-orphans
