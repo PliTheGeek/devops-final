@@ -18,37 +18,52 @@ Project ini mendemonstrasikan implementasi siklus DevOps secara end-to-end:
 * **Prometheus**: Mengumpulkan metrik dari aplikasi dan server.
 * **Grafana**: Visualisasi data metrik melalui dashboard interaktif.
 
-
-
 ## 📦 Struktur Direktori
-
 ```text
 ├── config/
 │   ├── prometheus.yml        # Konfigurasi scrape metrics
-├── app-project (coffe-calc)/
-│   ├── public                # Isinya Project Appnya
+├── app-project (coffee-calc)/
+│   ├── public/               # Application files
 ├── docker-compose.yml        # Orkestrasi seluruh stack devops
-├─ docker-compose.prod.yml    # Orkestrasi seluruh stack devops versi production
+├── docker-compose.prod.yml   # Orkestrasi seluruh stack devops versi production
 ├── server.js                 # API dengan endpoint baru /test-db
 ├── .github/workflows/        # Automasi deployment (GitHub Actions)
 └── README.md
+```
 
+## 🚀 Cara Menjalankan
+
+### Prerequisites
+- Docker & Docker Compose terinstall
+- Node.js (untuk development lokal)
+- Git
+
+### Local Development
+```bash
+# Clone repository
+git clone <repository-url>
+cd coffee-calc
+
+# Jalankan dengan Docker Compose
+docker-compose up -d
+
+# Atau untuk production
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
 ## 🔗 Akses Publik
 
-* **Aplikasi**: `http://http://70.153.136.192:3000`
-* **Test Database**: `http://70.153.136.192/test-db`
+* **Aplikasi**: `http://70.153.136.192:3000`
+* **Test Database**: `http://70.153.136.192:3000/test-db`
 * **Prometheus**: `http://70.153.136.192:9090`
-* **Grafana**: `http://70.153.136.192` (atau port sesuai konfigurasi Anda)
+* **Grafana**: `http://70.153.136.192:3001` (username: admin, password: admin)
 
 ---
 
-## Testing Performance Matrix
+## 📊 Testing Performance Metrics
 
-* Click Menggunakan coffee_brews_total 
-* Video Demo Project : https://drive.google.com/file/d/1fJu4B2mYi3JfUW9o7SPwpnygBGsLrQnM/view?usp=sharing
-
+* Metrics menggunakan `coffee_brews_total` 
+* Video Demo Project: [Link Video](https://youtu.be/Ztppdyn1IP0)
 
 ## 👥 Team Roles & Responsibilities
 
@@ -70,7 +85,12 @@ Sets up Prometheus and Grafana, builds monitoring dashboards, and ensures system
 **Documentation & Video – Elvaretta Anantya Velya (2211104074), Rafli Dhafin Kamil (2211104018)**  
 Creates setup and architecture documentation, prepares demo flow, and ensures execution evidence through video.
 
+## 🙏 Special Thanks To 
 
-## Special Thanks To 
+[@yudhaislamisulistya](https://github.com/yudhaislamisulistya) as a Lecturer and Mentor for teaching us how to build and learn DevOps in best practice way. It was an interesting class even if it's only 5 students XD
 
-[@yudhaislamisulistya](https://github.com/yudhaislamisulistya) As A Lecturer and Mentor For Teaching Us How To Build and learning DevOps in Best Practice Way, It Was An Interesting Class Even If Its Only 5 Student XD
+---
+
+## 📝 License
+
+This project is created for educational purposes as part of DevOps course assignment.
